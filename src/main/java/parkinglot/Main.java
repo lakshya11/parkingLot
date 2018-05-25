@@ -1,4 +1,3 @@
-//import org.apache.*;
 package parkinglot;
 
 import java.io.*;
@@ -18,19 +17,9 @@ public class Main {
 
         InputStream filePath = Main.class.getClassLoader().getResourceAsStream(fileName);
         System.out.println("File path : "+filePath);
-        //String path = filePath.getPath();
-
-        //String fileName = path.substring(path.lastIndexOf('/') + 1);
-        //System.out.println(fileName);
         String line = null;
 
         try {
-            // FileReader reads text files in the default encoding.
-//            FileReader fileReader =
-//                    new FileReader(path);
-
-//            BufferedReader bufferedReader =
-//                    new BufferedReader(fileReader);
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(filePath));
 
 
