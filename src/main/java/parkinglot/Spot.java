@@ -1,3 +1,5 @@
+package parkinglot;
+
 public class Spot {
     Integer id;
     Integer level;              //For multistorey building

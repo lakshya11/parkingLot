@@ -1,3 +1,5 @@
+package parkinglot;
+
 abstract class Vehicle {
     String registrtationNumber;
     String color;

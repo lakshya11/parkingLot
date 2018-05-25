@@ -1,12 +1,13 @@
 #!/bin/sh
 mvn clean install -DskipTests
-javac src/main/java/Main.java
-cd src/main/java
+mvn compile
+mvn package
+#java -jar target/parkingLot-1.0.jar
 if [ -z "$1" ]
   then
     echo "No argument supplied"
     #gnome-terminal
-    java Main
+    java -jar target/parkingLot-1.0.jar
 else
-    java Main $1
+    java -jar target/parkingLot-1.0.jar $1
 fi

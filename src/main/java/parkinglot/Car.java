@@ -1,3 +1,5 @@
+package parkinglot;
+
 public class Car extends Vehicle {
 
     public Car(String registrtationNumber, String color){

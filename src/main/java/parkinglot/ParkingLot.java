@@ -1,3 +1,5 @@
+package parkinglot;
+
 import java.util.*;
 import java.util.logging.Logger;
 
@@ -9,11 +11,11 @@ public class ParkingLot {
     Integer parkingLotSize;
     Stack<Spot> availableSpots;
     HashMap<String,List<Vehicle>> parkingLotByColor;     //later elastic search can be used
-    HashMap<Integer,Vehicle> parkingLot;
+    HashMap<Integer, Vehicle> parkingLot;
 
     public ParkingLot(){
         this.availableSpots = new Stack<Spot>();
-        this.parkingLot = new HashMap<Integer,Vehicle>();
+        this.parkingLot = new HashMap<Integer, Vehicle>();
         this.parkingLotByColor = new HashMap<String,List<Vehicle>>();
     }
 
@@ -55,7 +57,7 @@ public class ParkingLot {
     public void removeVehicle(Spot spot){
 
         spot.setStatus("free");
-        LOGGER.info("Current available spots:- "+this.availableSpots.size());
+        //LOGGER.info("Current available spots:- "+this.availableSpots.size());
         availableSpots.push(spot);
         parkingLot.remove(spot.getId());
     }
@@ -63,7 +65,7 @@ public class ParkingLot {
     public void showParkingStatus(){
         //TODO sort on slot number
         System.out.println("Slot No.\tRegistration No"+"\t Color");
-        for(Map.Entry<Integer,Vehicle> entry : parkingLot.entrySet()){
+        for(Map.Entry<Integer, Vehicle> entry : parkingLot.entrySet()){
             System.out.println(entry.getKey()+"\t"+entry.getValue().registrtationNumber+"\t"+entry.getValue().color);
         }
     }
