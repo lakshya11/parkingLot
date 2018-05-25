@@ -1,5 +1,6 @@
 import java.util.*;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 public class ParkingLot {
 
@@ -69,13 +70,54 @@ public class ParkingLot {
     }
 
     public List<String> fetchVehiclesByColour(String searchColor){
-       List<Vehicle> vehicles = this.parkingLotByColor.get(searchColor);
-       ArrayList<String> searchedVehicles = new ArrayList<String>();
-       for(Vehicle vehicle : vehicles){
-           searchedVehicles.add(vehicle.getRegistrtationNumber());
-       }
-       return searchedVehicles;
+        try {
+            List<Vehicle> vehicles = this.parkingLotByColor.get(searchColor);
+            if(null!=vehicles) {
+                ArrayList<String> searchedVehicles = new ArrayList<String>();
+                for (Vehicle vehicle : vehicles) {
+                    searchedVehicles.add(vehicle.getRegistrtationNumber());
+                }
+                return searchedVehicles;
+            }
+            else{
+                return  null;
+            }
+        }catch (Exception exp){
+            //TODO logger.error
+            exp.printStackTrace();
+            return null;
+        }
     }
+
+    public List<String> fetchVehicleSlotsByColor(String searchColor){
+        try {
+            List<Vehicle> vehicles = this.parkingLotByColor.get(searchColor);
+            if (null != vehicles) {
+                ArrayList<String> searchedVehicles = new ArrayList<String>();
+                for (Vehicle vehicle : vehicles) {
+                    searchedVehicles.add(vehicle.getParkedIn().getId().toString());
+                }
+                return searchedVehicles;
+            } else {
+                return null;
+            }
+        }
+        catch (Exception exp){
+            //TODO add logger.error
+            exp.printStackTrace();
+            return null;
+        }
+
+    }
+
+    public Integer fetchVehicleSlotsByRegistraionNumber(String registrationNumber){
+         return parkingLot.entrySet()
+                 .stream()
+                 .filter(entry -> Objects.equals(entry.getValue().getRegistrtationNumber(), registrationNumber))
+                 .map(Map.Entry::getKey)
+                 .collect(Collectors.toList()).get(0);
+    }
+
 
     public void createParkingSlots(Integer size){
         LOGGER.info("Creating following parking spots:-");

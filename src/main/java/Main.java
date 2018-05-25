@@ -32,7 +32,6 @@ public class Main {
             FileReader fileReader =
                     new FileReader(path);
 
-
             BufferedReader bufferedReader =
                     new BufferedReader(fileReader);
 
@@ -66,6 +65,8 @@ public class Main {
         System.out.println("Give input command to create and run parking lot");
         Scanner in = new Scanner(System.in);
         String command;
+        String searchColor;
+        String registrationNumber;
         ParkingLot parkingLot = new ParkingLot();
         do {
 
@@ -79,7 +80,7 @@ public class Main {
                     System.out.println("Created a parking lot with "+size+ " slots");
                     break;
                 case "park":
-                    String registrationNumber = parsed_command[1];
+                    registrationNumber = parsed_command[1];
                     String color = parsed_command[2];
                     Vehicle vehicle = new Car(registrationNumber,color);  // can use any abstraction(bus,motorcycle,truck)
                     Spot spot = parkingLot.placeVehicle(vehicle);
@@ -97,25 +98,33 @@ public class Main {
                     parkingLot.showParkingStatus();
                     break;
                 case "registration_numbers_for_cars_with_colour":
-                    String searchColor = parsed_command[1];
+                    searchColor = parsed_command[1];
                     List<String> registrationNumbers= parkingLot.fetchVehiclesByColour(searchColor);
-//                    System.out.println(coloredVehicles.stream()
-//                            .map(number -> String.valueOf(number))
-//                            .collect(toStringJoiner(", ")));
-                    StringBuilder result = new StringBuilder();
-
-                    for(String registrationNo : registrationNumbers){
-                        result.append(registrationNo);
-                        result.append(',');
+                    if(null!=registrationNumbers) {
+                        String result = String.join(",", registrationNumbers);
+                        System.out.println(result);
+                    }else{
+                        System.out.println("Not found");   //TODO test case
                     }
-                    System.out.println(result);
                     break;
+                case "slot_numbers_for_cars_with_colour":
+                    searchColor = parsed_command[1];
+                    List<String> vehiclesSlots = parkingLot.fetchVehicleSlotsByColor(searchColor);
+                    if(null!=vehiclesSlots) {
+                        String slotNumbers = String.join(",", vehiclesSlots);
+                        System.out.println(slotNumbers);
+                    }
+                    else{
+                        System.out.println("Not found");
+                    }
+                    break;
+                case "slot_number_for_registration_number":
+                    registrationNumber = parsed_command[1];
+                    Integer spotNumber = parkingLot.fetchVehicleSlotsByRegistraionNumber(registrationNumber);
+                    System.out.println(null!=spotNumber ? spotNumber:"Not found");
                 default:
-                    //test case for this
+                    //TODO test case for this
                     System.out.println("No such command found in the system");
-
-
-
 
             }
             System.out.println("Type exit to terminate the program");

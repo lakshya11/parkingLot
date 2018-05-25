@@ -15,4 +15,8 @@ abstract class Vehicle {
     public String getRegistrtationNumber(){
         return registrtationNumber;
     }
+
+    public Spot getParkedIn(){
+        return parkedIn;
+    }
 }
