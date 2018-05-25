@@ -43,7 +43,7 @@ public class ParkingLot {
                 }
 
             } else {
-                System.out.println("Parking Lot is full");  // full size->overflow testcases
+                System.out.println("Sorry, parking lot is full");  // TODO full size->overflow testcases
             }
         }catch (Exception exp){
             //TODO replace with logger looger error
@@ -61,16 +61,22 @@ public class ParkingLot {
     }
 
     public void showParkingStatus(){
-        //get filled spots of vehicle
+        //TODO sort on slot number
         System.out.println("Slot No.\tRegistration No"+"\t Color");
         for(Map.Entry<Integer,Vehicle> entry : parkingLot.entrySet()){
             System.out.println(entry.getKey()+"\t"+entry.getValue().registrtationNumber+"\t"+entry.getValue().color);
         }
     }
-//
-//    public List<Vehicle> fetchVehiclesByColour(String searchColor){
-//        return List<>
-//    }
+
+    public List<String> fetchVehiclesByColour(String searchColor){
+       List<Vehicle> vehicles = this.parkingLotByColor.get(searchColor);
+       ArrayList<String> searchedVehicles = new ArrayList<String>();
+       for(Vehicle vehicle : vehicles){
+           searchedVehicles.add(vehicle.getRegistrtationNumber());
+       }
+       return searchedVehicles;
+    }
+
     public void createParkingSlots(Integer size){
         LOGGER.info("Creating following parking spots:-");
         for(int i=size;i>0;--i){

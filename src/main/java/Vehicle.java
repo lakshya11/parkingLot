@@ -8,7 +8,11 @@ abstract class Vehicle {
         parkedIn = spot;
     }
 
-    public String getColor(){
+    public String getColor() {
         return color;
+    }
+
+    public String getRegistrtationNumber(){
+        return registrtationNumber;
     }
 }
