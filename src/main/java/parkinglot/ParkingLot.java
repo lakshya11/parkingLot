@@ -1,6 +1,5 @@
 import java.util.*;
 import java.util.logging.Logger;
-import java.util.stream.Collectors;
 
 public class ParkingLot {
 
@@ -111,11 +110,13 @@ public class ParkingLot {
     }
 
     public Integer fetchVehicleSlotsByRegistraionNumber(String registrationNumber){
-         return parkingLot.entrySet()
-                 .stream()
-                 .filter(entry -> Objects.equals(entry.getValue().getRegistrtationNumber(), registrationNumber))
-                 .map(Map.Entry::getKey)
-                 .collect(Collectors.toList()).get(0);
+            return parkingLot.entrySet()
+                    .stream()
+                    .filter(entry -> Objects.equals(entry.getValue().getRegistrtationNumber(), registrationNumber))
+                    .map(Map.Entry::getKey)
+                    .findFirst()
+                    .orElse(null);
+
     }
 
 

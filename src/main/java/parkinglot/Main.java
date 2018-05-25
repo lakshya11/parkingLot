@@ -1,10 +1,7 @@
 //import org.apache.*;
+package parkinglot;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.net.URL;
+import java.io.*;
 import java.util.List;
 import java.util.Scanner;
 import java.util.logging.Logger;
@@ -19,9 +16,9 @@ public class Main {
 
     public static void readFromFile(String fileName){
 
-        URL filePath = Main.class.getClassLoader().getResource(fileName);
+        InputStream filePath = Main.class.getClassLoader().getResourceAsStream(fileName);
         System.out.println("File path : "+filePath);
-        String path = filePath.getPath();
+        //String path = filePath.getPath();
 
         //String fileName = path.substring(path.lastIndexOf('/') + 1);
         //System.out.println(fileName);
@@ -29,11 +26,13 @@ public class Main {
 
         try {
             // FileReader reads text files in the default encoding.
-            FileReader fileReader =
-                    new FileReader(path);
+//            FileReader fileReader =
+//                    new FileReader(path);
 
-            BufferedReader bufferedReader =
-                    new BufferedReader(fileReader);
+//            BufferedReader bufferedReader =
+//                    new BufferedReader(fileReader);
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(filePath));
+
 
             while((line = bufferedReader.readLine()) != null) {
                 System.out.println(line);
