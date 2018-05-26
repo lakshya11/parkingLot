@@ -45,7 +45,7 @@ public class ParkingLot {
                 }
 
             } else {
-                System.out.println("Sorry, parking lot is full");  // TODO full size->overflow testcases
+                System.out.println("Sorry, parking lot is full");
             }
         }catch (Exception exp){
             //TODO replace with logger looger error
@@ -54,12 +54,16 @@ public class ParkingLot {
         return spot;
     }
 
-    public void removeVehicle(Spot spot){
+    public Boolean removeVehicle(Spot spot){
+        Boolean removedVehicle = false;
 
-        spot.setStatus("free");
-        //LOGGER.info("Current available spots:- "+this.availableSpots.size());
-        availableSpots.push(spot);
-        parkingLot.remove(spot.getId());
+        if(parkingLot.containsKey(spot.getId())) {
+            spot.setStatus("free");
+            availableSpots.push(spot);
+            parkingLot.remove(spot.getId());
+            removedVehicle = true;
+        }
+        return removedVehicle;
     }
 
     public void showParkingStatus(){
@@ -123,12 +127,11 @@ public class ParkingLot {
 
 
     public void createParkingSlots(Integer size){
-        LOGGER.info("Creating following parking spots:-");
         for(int i=size;i>0;--i){
             this.availableSpots.push(new Spot(i));
         }
         setAvailableSpots(this.availableSpots);
-        LOGGER.info("Total size of available spots:"+this.availableSpots.size());
+        LOGGER.info("Created parking lot,Available spots:"+this.availableSpots.size());
     }
 
 
