@@ -15,3 +15,8 @@ To run in mode of reading input from file.The file "file_inputs" is bo present i
 To run in interactive mode
 ->path/to/parkingLot$./parking_lot.sh
 Type "exit" to exit the interactive mode of running the program
+
+Highlights and Extensions
+Data structure used : stack and hashmap
+Extensions: The problem can have extension in terms sizes of vehicle such as small(bicycle), medium(cars), large(truck), xtra-large(buses).
+Assumption:Currently only ground floor parking is taken into consideration but the design can have extensions to incorporate multi level parking also.
